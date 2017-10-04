@@ -1,35 +1,39 @@
 package services;
 
 
-import dao.ingredient_dao.impl.IngredientDAOImpl;
-import dao.item_dao.impl.ItemDAOImpl;
-import mvc.models.entities.drinks.Drink;
-import mvc.models.entities.drinks.coffee.*;
-import mvc.models.entities.drinks.coffee.impl.Americano;
-import mvc.models.entities.drinks.coffee.impl.Cappuccino;
-import mvc.models.entities.drinks.coffee.impl.Espresso;
-import mvc.models.entities.drinks.coffee.impl.Latte;
-import mvc.models.entities.drinks.tea.impl.BlackTea;
-import mvc.models.entities.drinks.tea.impl.GreenTea;
-import mvc.models.entities.drinks.tea.Tea;
-import mvc.models.entities.ingredients.Ingredient;
-import mvc.models.entities.items.sticks.Stick;
+import dao.IngredientDAO;
+import dao.ItemDAO;
+import dao.factory.impl.FactoryDAOImpl;
+import entities.drinks.Drink;
+import entities.drinks.coffee.*;
+import entities.drinks.coffee.impl.Americano;
+import entities.drinks.coffee.impl.Cappuccino;
+import entities.drinks.coffee.impl.Espresso;
+import entities.drinks.coffee.impl.Latte;
+import entities.drinks.tea.impl.BlackTea;
+import entities.drinks.tea.impl.GreenTea;
+import entities.drinks.tea.Tea;
+import entities.ingredients.Ingredient;
+import entities.items.impl.Stick;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DrinkService {
 
-    private static DrinkService drinkService;
+    private static DrinkService drinkServiceInstance;
+    private static IngredientDAO ingredientDAO = FactoryDAOImpl.getFactoryDAOInstance().getIngredientDAO();
+    private static ItemDAO itemDAO = FactoryDAOImpl.getFactoryDAOInstance().getItemDAO();
 
-    public static DrinkService getDrinkService() {
-        if (drinkService == null) {
+
+    public static DrinkService getDrinkServiceInstance() {
+        if (drinkServiceInstance == null) {
             synchronized (DrinkService.class) {
-                if (drinkService == null)
-                    drinkService = new DrinkService();
+                if (drinkServiceInstance == null)
+                    drinkServiceInstance = new DrinkService();
             }
         }
-        return drinkService;
+        return drinkServiceInstance;
     }
 
     public synchronized boolean makeDrink(Drink drink) {
@@ -39,7 +43,7 @@ public class DrinkService {
         if (cup == null)
             return false;
 
-        Ingredient[] ingredients = IngredientDAOImpl.getIngredientDAOInstance().getAllIngredients();
+        Ingredient[] ingredients = ingredientDAO.getAllIngredients();
         if (drink.isCoffee()) {
             Coffee coffee = (Coffee) drink;
             for (Ingredient ingredient : ingredients) {
@@ -91,12 +95,12 @@ public class DrinkService {
             }
         }
 
-        ItemDAOImpl.getItemDAOInstance().updateItem(cup, CupService.getCupServiceInstance().getCupCount(cup) - 1);
+        itemDAO.updateItem(cup, CupService.getCupServiceInstance().getCupCount(cup) - 1);
         int sticksCount = StickService.getStickServiceInstance().getSticksCount();
         if (sticksCount > 0)
-            ItemDAOImpl.getItemDAOInstance().updateItem(Stick.DB_NAME, sticksCount - 1);
+            itemDAO.updateItem(Stick.DB_NAME, sticksCount - 1);
         for (Ingredient ingredient : ingredients) {
-            IngredientDAOImpl.getIngredientDAOInstance().updateIngredient(ingredient.getName(), ingredient.getQuantity());
+            ingredientDAO.updateIngredient(ingredient.getName(), ingredient.getQuantity());
         }
         return result;
     }
@@ -104,41 +108,15 @@ public class DrinkService {
     public synchronized Drink[] getAvailableDrinks() {
         Drink[] drinks = {new Espresso(), new Americano(), new Cappuccino(), new Latte(), new BlackTea(), new GreenTea()};
         List<Drink> result = new ArrayList<>();
-        Ingredient[] ingredients = IngredientDAOImpl.getIngredientDAOInstance().getAllIngredients();
+        Ingredient[] ingredients = ingredientDAO.getAllIngredients();
         for (Drink drink : drinks) {
             boolean available = true;
-            if (drink.isCoffee()) {
-                Coffee coffee = (Coffee) drink;
-                for (Ingredient ingredient : ingredients) {
-                    switch (ingredient.getName()) {
-                        case "water":
-                            available = coffee.getWater() > ingredient.getQuantity() ? false : available;
-                            break;
-                        case "milk":
-                            available = coffee.getMilk() > ingredient.getQuantity() ? false : available;
-                            break;
-                        case "coffee":
-                            available = coffee.getCoffee() > ingredient.getQuantity() ? false : available;
-                            break;
+                for(Ingredient drinkIngredient : drink.getIngredients()){
+                    for(Ingredient ingredient : ingredients){
+                        if(drinkIngredient.getName().equals(ingredient.getName()))
+                            available = drinkIngredient.getQuantity() > ingredient.getQuantity() ? false : available;
                     }
                 }
-            }
-            if (drink.isTea()) {
-                Tea tea = (Tea) drink;
-                for (Ingredient ingredient : ingredients) {
-                    switch (ingredient.getName()) {
-                        case "water":
-                            available = tea.getWater() > ingredient.getQuantity() ? false : available;
-                            break;
-                        case "black_tea":
-                            available = tea.getBlackTea() > ingredient.getQuantity() ? false : available;
-                            break;
-                        case "green_tea":
-                            available = tea.getGreenTea() > ingredient.getQuantity() ? false : available;
-                            break;
-                    }
-                }
-            }
             if (available)
                 result.add(drink);
         }

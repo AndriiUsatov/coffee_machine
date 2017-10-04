@@ -8,14 +8,14 @@
          metadata-complete="true">
 
     <welcome-file-list>
-        <welcome-file>exit</welcome-file>
+        <welcome-file>index</welcome-file>
     </welcome-file-list>
     <error-page>
         <location>/pages/error.jsp</location>
     </error-page>
     <servlet>
         <servlet-name>loginServlet</servlet-name>
-        <servlet-class>mvc.controllers.servlets.LoginServlet</servlet-class>
+        <servlet-class>controllers.servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
@@ -23,7 +23,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>registrationServlet</servlet-name>
-        <servlet-class>mvc.controllers.servlets.RegistrationServlet</servlet-class>
+        <servlet-class>controllers.servlets.RegistrationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>registrationServlet</servlet-name>
@@ -31,7 +31,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>makeDrink</servlet-name>
-        <servlet-class>mvc.controllers.servlets.MakeDrinkServlet</servlet-class>
+        <servlet-class>controllers.servlets.MakeDrinkServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>makeDrink</servlet-name>
@@ -39,7 +39,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>replenishAccount</servlet-name>
-        <servlet-class>mvc.controllers.servlets.ReplenishAccountServlet</servlet-class>
+        <servlet-class>controllers.servlets.ReplenishAccountServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>replenishAccount</servlet-name>
@@ -47,7 +47,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>personalAccountServlet</servlet-name>
-        <servlet-class>mvc.controllers.servlets.PersonalAccountServlet</servlet-class>
+        <servlet-class>controllers.servlets.PersonalAccountServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>personalAccountServlet</servlet-name>
@@ -55,23 +55,23 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>fillContainerServlet</servlet-name>
-        <servlet-class>mvc.controllers.servlets.FillContainerServlet</servlet-class>
+        <servlet-class>controllers.servlets.FillContainerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>fillContainerServlet</servlet-name>
         <url-pattern>/fillContainer</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>exitServlet</servlet-name>
-        <servlet-class>mvc.controllers.servlets.ExitServlet</servlet-class>
+        <servlet-name>indexServlet</servlet-name>
+        <servlet-class>controllers.servlets.IndexServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>exitServlet</servlet-name>
-        <url-pattern>/exit</url-pattern>
+        <servlet-name>indexServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>fillingHistoryServlet</servlet-name>
-        <servlet-class>mvc.controllers.servlets.GetFillsHistoryServlet</servlet-class>
+        <servlet-class>controllers.servlets.GetFillsHistoryServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>fillingHistoryServlet</servlet-name>

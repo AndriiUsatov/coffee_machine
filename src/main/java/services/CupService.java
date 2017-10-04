@@ -1,13 +1,15 @@
 package services;
 
-import dao.item_dao.impl.ItemDAOImpl;
-import mvc.models.entities.drinks.Drink;
-import mvc.models.entities.items.cups.BigCup;
-import mvc.models.entities.items.cups.LittleCup;
-import mvc.models.entities.items.cups.MiddleCup;
+import dao.ItemDAO;
+import dao.factory.impl.FactoryDAOImpl;
+import entities.drinks.Drink;
+import entities.items.impl.BigCup;
+import entities.items.impl.LittleCup;
+import entities.items.impl.MiddleCup;
 
 public class CupService {
     private static CupService cupServiceInstance;
+    private static ItemDAO itemDAO = FactoryDAOImpl.getFactoryDAOInstance().getItemDAO();
 
     private CupService(){}
 
@@ -24,19 +26,19 @@ public class CupService {
     public synchronized String chooseCup4Drink(Drink drink){
         String cup = null;
         if(LittleCup.SIZE >= drink.getTotalSize()
-                && ItemDAOImpl.getItemDAOInstance().getItemByName(LittleCup.DB_NAME).getCount() > 0){
+                && itemDAO.getItemByName(LittleCup.DB_NAME).getCount() > 0){
             cup = LittleCup.DB_NAME;
         }else if(MiddleCup.SIZE >= drink.getTotalSize()
-                && ItemDAOImpl.getItemDAOInstance().getItemByName(MiddleCup.DB_NAME).getCount() > 0){
+                && itemDAO.getItemByName(MiddleCup.DB_NAME).getCount() > 0){
             cup = MiddleCup.DB_NAME;
         }else if(BigCup.SIZE >= drink.getTotalSize()
-                && ItemDAOImpl.getItemDAOInstance().getItemByName(BigCup.DB_NAME).getCount() > 0){
+                && itemDAO.getItemByName(BigCup.DB_NAME).getCount() > 0){
             cup = BigCup.DB_NAME;
         }
         return cup;
     }
 
     public synchronized int getCupCount(String cupName){
-        return ItemDAOImpl.getItemDAOInstance().getItemByName(cupName).getCount();
+        return itemDAO.getItemByName(cupName).getCount();
     }
 }

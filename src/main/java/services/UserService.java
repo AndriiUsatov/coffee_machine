@@ -1,15 +1,22 @@
 package services;
 
 
-import dao.user_dao.impl.UserDAOImpl;
-import mvc.models.entities.users.User;
-import mvc.models.validators.UserValidator;
+import connector.ConnectionPool;
+import dao.UserDAO;
+import dao.factory.impl.FactoryDAOImpl;
+import entities.users.User;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import validators.UserValidator;
 
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class UserService {
     private static UserService userServiceInstance;
-    private UserDAOImpl userDAO = UserDAOImpl.getUserDAOInstance();
+    private UserDAO userDAO = FactoryDAOImpl.getFactoryDAOInstance().getUserDAO();
+    private static final Logger logger = Logger.getLogger(UserService.class);
 
     private UserService() {
     }
@@ -25,9 +32,38 @@ public class UserService {
     }
 
     public synchronized boolean registerUser(User user) {
-        if (UserValidator.getUserValidatorInstance().validateRegister(user))
-            return userDAO.addUser(user);
-        return false;
+        boolean result = true;
+        if (UserValidator.getUserValidatorInstance().validateRegister(user)) {
+            if (userDAO.getUserByLogin(user.getLogin()) != null){
+                return false;}
+            try (Connection connection = ConnectionPool.getConnector().getConnection()) {
+                try {
+                    connection.setAutoCommit(false);
+                    if(userDAO.addHuman(user, connection) && userDAO.addUser(user, connection)
+                            && userDAO.addMachineHasUser(user, connection)){
+                        logger.log(Level.INFO, "Added new user - " + user.getLogin());
+                        connection.commit();
+                    }
+                    else {
+                        connection.rollback();
+                        result = false;
+                    }
+                }catch (SQLException e){
+                    logger.log(Level.ERROR, "Exception", e);
+                    result = false;
+                    connection.rollback();
+                    e.printStackTrace();
+                }
+                finally {
+                    connection.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                logger.log(Level.ERROR, "Exception", e);
+                result = false;
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
     public synchronized User getUser(String login) {

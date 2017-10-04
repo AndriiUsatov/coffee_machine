@@ -1,14 +1,15 @@
 package services;
 
-import dao.ingredient_dao.IngredientDAO;
-import dao.ingredient_dao.impl.IngredientDAOImpl;
-import mvc.models.entities.ingredients.Ingredient;
-import mvc.models.entities.users.User;
+import dao.IngredientDAO;
+import dao.factory.impl.FactoryDAOImpl;
+import entities.Fill;
+import entities.ingredients.Ingredient;
+import entities.users.User;
 
 public class IngredientService {
 
     private static IngredientService ingredientServiceInstance;
-    private IngredientDAO ingredientDAO = IngredientDAOImpl.getIngredientDAOInstance();
+    private IngredientDAO ingredientDAO = FactoryDAOImpl.getFactoryDAOInstance().getIngredientDAO();
 
     private IngredientService() {
     }
@@ -37,4 +38,18 @@ public class IngredientService {
     public Ingredient getIngredientByName(String sugar) {
         return ingredientDAO.getIngredientByName(sugar);
     }
+
+    public synchronized void checkExpirationDate(){
+        Ingredient[] ingredients = ingredientDAO.getAllIngredients();
+        for(Ingredient ingredient : ingredients){
+            if(ingredient.getExpirationDate().getTime() <= System.currentTimeMillis()){
+                ingredientDAO.updateIngredient(ingredient.getName(),0);
+            }
+        }
+    }
+
+    public synchronized Fill[] getAllFills(){
+        return ingredientDAO.getIngredientFills();
+    }
+
 }

@@ -15,7 +15,7 @@
 <body>
 <form method="GET"  id="userLine">
     <span>${currentUser.getLogin()}</span>
-    <span><a href="exit" id="exitButton" class="userLineAttr"><img src="img/exit_button.png"
+    <span><a href="index" id="exitButton" class="userLineAttr"><img src="img/exit_button.png"
                                                                    align="right"
                                                                    alt="Exit"></a></span>
 </form>

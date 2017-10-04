@@ -7,7 +7,7 @@
     <uri>/WEB-INF/sugarTag</uri>
     <tag>
         <name>sugarTag</name>
-        <tag-class>mvc.view.taglib.SugarTag</tag-class>
+        <tag-class>taglib.SugarTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 </taglib>

@@ -9,7 +9,7 @@
 <p>${drink.getName()} is ready.</p>
 <form method="post" action="login">
     <input type="submit" value="Back to menu" >
-    <input type="submit" value="Exit" formaction="exit">
+    <input type="submit" value="Exit" formaction="index">
 </form>
 <%@include file="footer.jsp"%>
 </body>

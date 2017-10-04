@@ -1,4 +1,3 @@
-<%@ page import="mvc.models.entities.users.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -20,7 +19,7 @@
     </span>
     <input type="submit" value="<fmt:message key="fillings_history" bundle="${loc}"/>" name="fillsHistory"
            id="fillingHistory" formaction="fillingHistory"/>
-    <span><a href="exit" id="exitButton" class="userLineAttr"><img src="img/exit_button.png"
+    <span><a href="index" id="exitButton" class="userLineAttr"><img src="img/exit_button.png"
                                                                    align="right"
                                                                    alt="Exit"></a></span>
 </form>

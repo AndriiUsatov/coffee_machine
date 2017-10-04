@@ -7,7 +7,7 @@
     <uri>/WEB-INF/pages</uri>
     <tag>
         <name>pages</name>
-        <tag-class>mvc.view.taglib.PagesTag</tag-class>
+        <tag-class>taglib.PagesTag</tag-class>
         <body-content>empty</body-content>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>

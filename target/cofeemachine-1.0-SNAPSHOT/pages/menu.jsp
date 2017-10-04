@@ -1,19 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="mvc.models.entities.users.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="/WEB-INF/sugarTag" prefix="st" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:requestEncoding value="utf-8"/>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="i18n" var="loc"/>
-<%
-    User currentUser = (User) session.getAttribute("currentUser");
-//    if (currentUser == null || request.getAttribute("user_dao") != null
-//            && !currentUser.getLogin().equals(request.getAttribute("user_dao"))) {
-//        currentUser = (User) request.getAttribute("user_dao");
-//        session.setAttribute("currentUser", currentUser);
-//    }
-%>
+
 <html>
 <head>
     <style>
@@ -23,12 +15,13 @@
 </head>
 <body>
 <form method="GET" action="personalAccount" id="userLine">
-    <input type="submit" name="gotoPA" id="gotoPA" class="userLineAttr" value="<fmt:message key="personal_cabinet" bundle="${loc}"/> ">
+    <input type="submit" name="gotoPA" id="gotoPA" class="userLineAttr"
+           value="<fmt:message key="personal_cabinet" bundle="${loc}"/> ">
     <span class="userLineAttr"><fmt:message key="balance" bundle="${loc}"/> ${currentUser.getBalance()} UAH</span>
     <span class="userLineAttr">${currentUser.getLogin()}</span>
-    <span><a href="exit" id="exitButton" class="userLineAttr"><img src="img/exit_button.png"
-                                                                          align="right"
-                                                                          alt="Exit"></a></span>
+    <span><a href="index" id="exitButton" class="userLineAttr"><img src="img/exit_button.png"
+                                                                   align="right"
+                                                                   alt="Exit"></a></span>
 </form>
 <aside>
     <br/>
@@ -53,9 +46,9 @@
 
         <fmt:message key="milk" bundle="${loc}"/><br/>
         <label for="milkAll"><input type="radio" name="milkAvailability" id="milkAll" value="allDrinks"
-                                   <c:if test="${milkAvailability eq 'allDrinks'}">
-                                       checked="checked"
-                                   </c:if>
+                <c:if test="${milkAvailability eq 'allDrinks'}">
+                    checked="checked"
+                </c:if>
         /><fmt:message key="all_drinks" bundle="${loc}"/></label><br/>
         <label for="withMilk"><input type="radio" name="milkAvailability" id="withMilk" value="withMilk"
                 <c:if test="${milkAvailability eq 'withMilk'}">
@@ -73,15 +66,19 @@
 
 <main>
     <form action="makeDrink" id="coffeeForm" method="GET"><br/>
-        <span id="sugarSpan"><fmt:message key="count_of_sugar" bundle="${loc}"/><st:sugarTag/></span><br/><br/>
+        <span id="sugarSpan">
+            <c:if test="${sugarAvailable}">
+                <fmt:message key="count_of_sugar" bundle="${loc}"/>
+            </c:if>
+            <st:sugarTag/></span><br/><br/>
         <c:forEach var="drink" items="${drinks}">
-            <input type="submit" class="buttons" name="${drink.getName().toLowerCase()}" value="${drink.getName()}"
-            <c:if test="${0 > currentUser.getBalance().compareTo(drink.getPrice())}">
-                disabled="disabled"
-            </c:if>/>
+            <input type="submit" class="buttons" name="selectedDrink" value="${drink.getName()}"
+                    <c:if test="${0 > currentUser.getBalance().compareTo(drink.getPrice())}">
+                        disabled="disabled"
+                    </c:if>/>
         </c:forEach>
     </form>
 </main>
-<%@include file="footer.jsp"%>
+<%@include file="footer.jsp" %>
 </body>
 </html>

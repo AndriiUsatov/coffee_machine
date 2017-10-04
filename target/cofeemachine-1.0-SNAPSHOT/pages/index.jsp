@@ -3,9 +3,7 @@
 <fmt:requestEncoding value="utf-8"/>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="i18n" var="loc"/>
-<%
-    session.removeAttribute("currentUser");
-%>
+
 <html>
 <head>
     <style><%@include file="stylesheets/index.css"%></style>
