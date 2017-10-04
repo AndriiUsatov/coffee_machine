@@ -1,74 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="495687a2-d7d8-4118-8b23-e92d4bd8c764" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/connector/ConnectionPool.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/entities/ingredients/builder/IngredientBuilder.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/connector/DBConnector.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/dao/ingredient_dao/IngredientDAO.java" afterPath="$PROJECT_DIR$/src/main/java/dao/IngredientDAO.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/dao/ingredient_dao/impl/IngredientDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/IngredientDAOImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/dao/item_dao/ItemDAO.java" afterPath="$PROJECT_DIR$/src/main/java/dao/ItemDAO.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/dao/item_dao/impl/ItemDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/ItemDAOImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/dao/user_dao/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/dao/UserDAO.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/dao/user_dao/impl/UserDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/UserDAOImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/controllers/Dispatcher.java" afterPath="$PROJECT_DIR$/src/main/java/controllers/Dispatcher.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/controllers/servlets/ExitServlet.java" afterPath="$PROJECT_DIR$/src/main/java/controllers/servlets/IndexServlet.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/controllers/servlets/FillContainerServlet.java" afterPath="$PROJECT_DIR$/src/main/java/controllers/servlets/FillContainerServlet.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/controllers/servlets/GetFillsHistoryServlet.java" afterPath="$PROJECT_DIR$/src/main/java/controllers/servlets/GetFillsHistoryServlet.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/controllers/servlets/LoginServlet.java" afterPath="$PROJECT_DIR$/src/main/java/controllers/servlets/LoginServlet.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/controllers/servlets/MakeDrinkServlet.java" afterPath="$PROJECT_DIR$/src/main/java/controllers/servlets/MakeDrinkServlet.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/controllers/servlets/PersonalAccountServlet.java" afterPath="$PROJECT_DIR$/src/main/java/controllers/servlets/PersonalAccountServlet.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/controllers/servlets/RegistrationServlet.java" afterPath="$PROJECT_DIR$/src/main/java/controllers/servlets/RegistrationServlet.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/controllers/servlets/ReplenishAccountServlet.java" afterPath="$PROJECT_DIR$/src/main/java/controllers/servlets/ReplenishAccountServlet.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/Fill.java" afterPath="$PROJECT_DIR$/src/main/java/entities/Fill.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/card/Card.java" afterPath="$PROJECT_DIR$/src/main/java/entities/Card.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/drinks/Drink.java" afterPath="$PROJECT_DIR$/src/main/java/entities/drinks/Drink.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/drinks/coffee/Coffee.java" afterPath="$PROJECT_DIR$/src/main/java/entities/drinks/coffee/Coffee.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/drinks/coffee/impl/Americano.java" afterPath="$PROJECT_DIR$/src/main/java/entities/drinks/coffee/impl/Americano.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/drinks/coffee/impl/Cappuccino.java" afterPath="$PROJECT_DIR$/src/main/java/entities/drinks/coffee/impl/Cappuccino.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/drinks/coffee/impl/Espresso.java" afterPath="$PROJECT_DIR$/src/main/java/entities/drinks/coffee/impl/Espresso.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/drinks/coffee/impl/Latte.java" afterPath="$PROJECT_DIR$/src/main/java/entities/drinks/coffee/impl/Latte.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/drinks/tea/Tea.java" afterPath="$PROJECT_DIR$/src/main/java/entities/drinks/tea/Tea.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/drinks/tea/impl/BlackTea.java" afterPath="$PROJECT_DIR$/src/main/java/entities/drinks/tea/impl/BlackTea.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/drinks/tea/impl/GreenTea.java" afterPath="$PROJECT_DIR$/src/main/java/entities/drinks/tea/impl/GreenTea.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/ingredients/Ingredient.java" afterPath="$PROJECT_DIR$/src/main/java/entities/ingredients/Ingredient.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/items/Item.java" afterPath="$PROJECT_DIR$/src/main/java/entities/items/Item.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/items/cups/BigCup.java" afterPath="$PROJECT_DIR$/src/main/java/entities/items/impl/BigCup.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/items/cups/Cup.java" afterPath="$PROJECT_DIR$/src/main/java/entities/items/impl/Cup.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/items/cups/LittleCup.java" afterPath="$PROJECT_DIR$/src/main/java/entities/items/impl/LittleCup.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/items/cups/MiddleCup.java" afterPath="$PROJECT_DIR$/src/main/java/entities/items/impl/MiddleCup.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/items/sticks/Stick.java" afterPath="$PROJECT_DIR$/src/main/java/entities/items/impl/Stick.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/machines/CoffeeMachine.java" afterPath="$PROJECT_DIR$/src/main/java/entities/CoffeeMachine.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/users/Role.java" afterPath="$PROJECT_DIR$/src/main/java/entities/users/Role.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/users/User.java" afterPath="$PROJECT_DIR$/src/main/java/entities/users/User.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/entities/users/buider/UserBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/entities/users/buider/UserBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/validators/CardValidator.java" afterPath="$PROJECT_DIR$/src/main/java/validators/CardValidator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/validators/IngredientController.java" afterPath="$PROJECT_DIR$/src/main/java/controllers/IngredientController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/models/validators/UserValidator.java" afterPath="$PROJECT_DIR$/src/main/java/validators/UserValidator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/view/1" afterPath="$PROJECT_DIR$/src/main/webapp/pages/stylesheets/error.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/view/taglib/PagesTag.java" afterPath="$PROJECT_DIR$/src/main/java/taglib/PagesTag.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/mvc/view/taglib/SugarTag.java" afterPath="$PROJECT_DIR$/src/main/java/taglib/SugarTag.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/log_file.log" afterPath="$PROJECT_DIR$/logs/log_file.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/services/CupService.java" afterPath="$PROJECT_DIR$/src/main/java/services/CupService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/services/DrinkService.java" afterPath="$PROJECT_DIR$/src/main/java/services/DrinkService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/services/IngredientService.java" afterPath="$PROJECT_DIR$/src/main/java/services/IngredientService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/services/ItemService.java" afterPath="$PROJECT_DIR$/src/main/java/services/ItemService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/services/PasswordService.java" afterPath="$PROJECT_DIR$/src/main/java/services/PasswordService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/services/StickService.java" afterPath="$PROJECT_DIR$/src/main/java/services/StickService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/services/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/services/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/META-INF/context.xml" afterPath="$PROJECT_DIR$/src/main/webapp/META-INF/context.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pagesTag.tld" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pagesTag.tld" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/sugarTag.tld" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/sugarTag.tld" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/error.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/pages/error.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/fillingHistory.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/pages/fillingHistory.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/pages/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/machine_settings.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/pages/machine_settings.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/menu.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/pages/menu.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/ready.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/pages/ready.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/stylesheets/index.css" afterPath="$PROJECT_DIR$/src/main/webapp/pages/stylesheets/index.css" />
-    </list>
+    <list default="true" id="495687a2-d7d8-4118-8b23-e92d4bd8c764" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -146,20 +79,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Ingredient.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/entities/ingredients/Ingredient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-659">
-              <caret line="9" column="60" lean-forward="false" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2656#2657#0" expanded="true" />
-                <element signature="e#2742#2743#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="IngredientController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/controllers/IngredientController.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -170,7 +89,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReplenishAccountServlet.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReplenishAccountServlet.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/controllers/servlets/ReplenishAccountServlet.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="327">
@@ -178,6 +97,30 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CupService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/services/CupService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="354">
+              <caret line="41" column="22" lean-forward="false" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1402#1403#0" expanded="true" />
+                <element signature="e#1466#1467#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServiceFactory.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/services/factory/ServiceFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -247,16 +190,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -1642,7 +1575,7 @@
       <workItem from="1506585852667" duration="7769000" />
       <workItem from="1506612587578" duration="75420000" />
       <workItem from="1506928514731" duration="4793000" />
-      <workItem from="1506956261827" duration="54179000" />
+      <workItem from="1506956261827" duration="54851000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1507021035322</created>
@@ -1672,11 +1605,18 @@
       <option name="project" value="LOCAL" />
       <updated>1507024150360</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Code refactor">
+      <created>1507121085357</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1507121085357</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="376929000" />
+    <option name="totallyTimeSpent" value="377601000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -1771,7 +1711,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Initial commitsd" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commitsd" />
+    <MESSAGE value="Code refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1792,14 +1733,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/error.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/fillingHistory.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -1943,18 +1876,6 @@
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/services/CupService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="22" lean-forward="false" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1402#1403#0" expanded="true" />
-            <element signature="e#1466#1467#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2276,6 +2197,26 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/services/CupService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="41" column="22" lean-forward="false" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1402#1403#0" expanded="true" />
+            <element signature="e#1466#1467#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/services/factory/ServiceFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
