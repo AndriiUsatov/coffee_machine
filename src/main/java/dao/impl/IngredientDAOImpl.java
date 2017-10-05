@@ -1,6 +1,6 @@
 package dao.impl;
 
-import connector.ConnectionPool;
+import connection.ConnectionPool;
 import dao.IngredientDAO;
 import entities.Fill;
 import entities.ingredients.Ingredient;
@@ -16,16 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+
 public class IngredientDAOImpl implements IngredientDAO {
 
-    private static Properties properties = new Properties();
+    private static Properties queries = new Properties();
     private static final Logger logger = Logger.getLogger(IngredientDAOImpl.class);
     private static IngredientDAOImpl ingredientDAOInstance;
     private static CoffeeMachine coffeeMachine = CoffeeMachine.getCoffeeMachineInstance();
 
     private IngredientDAOImpl() {
         try {
-            properties.load(getClass().getResourceAsStream("/queries.properties"));
+            queries.load(getClass().getResourceAsStream("/queries.properties"));
         } catch (IOException e) {
             logger.log(Level.ERROR, "Exception", e);
             e.printStackTrace();
@@ -46,7 +47,7 @@ public class IngredientDAOImpl implements IngredientDAO {
         List<Ingredient> ingredients = new ArrayList<>();
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(properties.getProperty("coffee_machine.get_all_ingredients"));
+            ResultSet resultSet = statement.executeQuery(queries.getProperty("coffee_machine.get_all_ingredients"));
             while (resultSet.next()) {
                 ingredients.add(new IngredientBuilder()
                         .setName(resultSet.getString("name"))
@@ -66,7 +67,7 @@ public class IngredientDAOImpl implements IngredientDAO {
     public synchronized Ingredient getIngredientByName(String ingredientName) {
         Ingredient ingredient = null;
         try (Connection connection = ConnectionPool.getConnector().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(properties.getProperty("coffee_machine.get_ingredient"))) {
+             PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.get_ingredient"))) {
             preparedStatement.setString(1, ingredientName);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -87,7 +88,7 @@ public class IngredientDAOImpl implements IngredientDAO {
     @Override
     public void noteIngredientUpdate(String ingredientName, int updateQuantity, User admin) {
         try (Connection connection = ConnectionPool.getConnector().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(properties.getProperty("coffee_machine.add_ingredient_fills"))) {
+             PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.add_ingredient_fills"))) {
             Ingredient ingredient = getIngredientByName(ingredientName);
             preparedStatement.setInt(1, updateQuantity);
             preparedStatement.setDate(2, new Date(System.currentTimeMillis()));
@@ -106,7 +107,7 @@ public class IngredientDAOImpl implements IngredientDAO {
         List<Fill> list = new ArrayList<>();
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(properties.getProperty("coffee_machine.get_all_ingr_fills"));
+            ResultSet resultSet = statement.executeQuery(queries.getProperty("coffee_machine.get_all_ingr_fills"));
             while (resultSet.next()) {
                 list.add(new Fill(resultSet.getString("name"), resultSet.getInt("quantity"), resultSet.getString("login"), resultSet.getDate("date")));
             }
@@ -122,7 +123,7 @@ public class IngredientDAOImpl implements IngredientDAO {
         if (ingredientName == null || ingredientName.equals(""))
             return false;
         try (Connection connection = ConnectionPool.getConnector().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(properties.getProperty("coffee_machine.update_ingredient"))) {
+             PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.update_ingredient"))) {
             Ingredient ingredient = getIngredientByName(ingredientName);
             preparedStatement.setLong(1, quantity);
             if (ingredient.getQuantity() < quantity)

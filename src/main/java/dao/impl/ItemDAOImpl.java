@@ -1,6 +1,6 @@
 package dao.impl;
 
-import connector.ConnectionPool;
+import connection.ConnectionPool;
 import dao.ItemDAO;
 import entities.Fill;
 import entities.items.Item;
@@ -20,14 +20,14 @@ import java.util.List;
 import java.util.Properties;
 
 public class ItemDAOImpl implements ItemDAO {
-    private static Properties properties = new Properties();
+    private static Properties queries = new Properties();
     private static final Logger logger = Logger.getLogger(ItemDAOImpl.class);
     private static CoffeeMachine coffeeMachine = CoffeeMachine.getCoffeeMachineInstance();
     private static ItemDAOImpl itemDAOInstance;
 
     private ItemDAOImpl() {
         try {
-            properties.load(getClass().getResourceAsStream("/queries.properties"));
+            queries.load(getClass().getResourceAsStream("/queries.properties"));
         } catch (IOException e) {
             logger.log(Level.ERROR, "Exception", e);
             e.printStackTrace();
@@ -56,7 +56,7 @@ public class ItemDAOImpl implements ItemDAO {
         };
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(properties.getProperty("coffee_machine.get_all_item"));
+            ResultSet resultSet = statement.executeQuery(queries.getProperty("coffee_machine.get_all_item"));
             while (resultSet.next()) {
                 String itemName = resultSet.getString("name");
                 for(Item item : list){
@@ -74,7 +74,7 @@ public class ItemDAOImpl implements ItemDAO {
     public synchronized Item getItemByName(String name) {
         Item item = null;
         try (Connection connection = ConnectionPool.getConnector().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(properties.getProperty("coffee_machine.get_item"))) {
+             PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.get_item"))) {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -105,7 +105,7 @@ public class ItemDAOImpl implements ItemDAO {
     @Override
     public void noteItemUpdate(String itemName, int updateCount, User admin) {
         try (Connection connection = ConnectionPool.getConnector().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(properties.getProperty("coffee_machine.add_item_fills"))) {
+             PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.add_item_fills"))) {
             Item item = getItemByName(itemName);
             preparedStatement.setInt(1, updateCount);
             preparedStatement.setDate(2, new Date(System.currentTimeMillis()));
@@ -125,7 +125,7 @@ public class ItemDAOImpl implements ItemDAO {
         if(itemName == null || itemName.equals(""))
             return false;
         try (Connection connection = ConnectionPool.getConnector().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(properties.getProperty("coffee_machine.update_item"))) {
+             PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.update_item"))) {
             Item item = getItemByName(itemName);
                 preparedStatement.setInt(1, count);
                 preparedStatement.setString(2, itemName);
@@ -147,7 +147,7 @@ public class ItemDAOImpl implements ItemDAO {
         List<Fill> list = new ArrayList<>();
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(properties.getProperty("coffee_machine.get_all_item_fills"));
+            ResultSet resultSet = statement.executeQuery(queries.getProperty("coffee_machine.get_all_item_fills"));
             while (resultSet.next()){
                 list.add(new Fill(resultSet.getString("name"),resultSet.getInt("quantity"),resultSet.getString("login"),resultSet.getDate("date")));
             }

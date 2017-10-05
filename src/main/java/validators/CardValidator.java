@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 
 public class CardValidator {
     public synchronized static boolean validateCard(Card card) {
+        if(card == null)
+            return false;
         return validateNumber(card.getCardNumber()) && validateSecureCode(card.getSecureCode()) ? true : false;
     }
 

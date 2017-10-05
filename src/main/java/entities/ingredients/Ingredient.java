@@ -95,4 +95,5 @@ public class Ingredient {
     public Long getMaxExpirationDate() {
         return Long.valueOf(properties.getProperty(name + "_expiration_date"));
     }
+
 }

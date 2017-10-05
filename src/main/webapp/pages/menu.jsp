@@ -27,7 +27,7 @@
     <br/>
     <form action="login">
         <br/>
-        <fmt:message key="type_of_drink" bundle="${loc}"/><br/>
+        <p align="center"><fmt:message key="type_of_drink" bundle="${loc}"/></p>
         <label for="typeOfDrink"><input type="radio" name="drinkType" id="typeOfDrink" value="allDrinks"
                 <c:if test="${drinkType eq 'allDrinks'}">
                     checked="checked"
@@ -44,7 +44,7 @@
                 </c:if>
         /><fmt:message key="tea" bundle="${loc}"/></label><br/><br/>
 
-        <fmt:message key="milk" bundle="${loc}"/><br/>
+        <p align="center"><fmt:message key="milk" bundle="${loc}"/></p>
         <label for="milkAll"><input type="radio" name="milkAvailability" id="milkAll" value="allDrinks"
                 <c:if test="${milkAvailability eq 'allDrinks'}">
                     checked="checked"

@@ -1,7 +1,7 @@
 package services;
 
 
-import connector.ConnectionPool;
+import connection.ConnectionPool;
 import dao.UserDAO;
 import dao.factory.impl.FactoryDAOImpl;
 import entities.users.User;
@@ -32,29 +32,30 @@ public class UserService {
     }
 
     public synchronized boolean registerUser(User user) {
+        if (user == null)
+            return false;
         boolean result = true;
         if (UserValidator.getUserValidatorInstance().validateRegister(user)) {
-            if (userDAO.getUserByLogin(user.getLogin()) != null){
-                return false;}
+            if (userDAO.getUserByLogin(user.getLogin()) != null) {
+                return false;
+            }
             try (Connection connection = ConnectionPool.getConnector().getConnection()) {
                 try {
                     connection.setAutoCommit(false);
-                    if(userDAO.addHuman(user, connection) && userDAO.addUser(user, connection)
-                            && userDAO.addMachineHasUser(user, connection)){
+                    if (userDAO.addHuman(user, connection) && userDAO.addUser(user, connection)
+                            && userDAO.addMachineHasUser(user, connection)) {
                         logger.log(Level.INFO, "Added new user - " + user.getLogin());
                         connection.commit();
-                    }
-                    else {
+                    } else {
                         connection.rollback();
                         result = false;
                     }
-                }catch (SQLException e){
+                } catch (SQLException e) {
                     logger.log(Level.ERROR, "Exception", e);
                     result = false;
                     connection.rollback();
                     e.printStackTrace();
-                }
-                finally {
+                } finally {
                     connection.setAutoCommit(true);
                 }
             } catch (SQLException e) {
@@ -67,10 +68,14 @@ public class UserService {
     }
 
     public synchronized User getUser(String login) {
+        if (login == null)
+            return null;
         return userDAO.getUserByLogin(login);
     }
 
     public synchronized boolean updateBalance(BigDecimal balance, String login) {
+        if(balance == null || login == null)
+            return false;
         return userDAO.updateBalance(balance, login);
     }
 }

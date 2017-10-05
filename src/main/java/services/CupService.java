@@ -39,6 +39,8 @@ public class CupService {
     }
 
     public synchronized int getCupCount(String cupName){
+        if(cupName == null)
+            return 0;
         return itemDAO.getItemByName(cupName).getCount();
     }
 }

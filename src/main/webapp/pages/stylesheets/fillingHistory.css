@@ -37,6 +37,13 @@ main{
     /*margin-top: 5%;*/
     /*margin-left: 20%;*/
 /*}*/
+#backToSettings{
+    margin-top: 20px;
+    background: linear-gradient(#00E000, #008F00);
+    color: white;
+    font-size: 14px;
+    border-radius: 25px;
+}
 img{
     width: 30px;
     height: 30px;

@@ -50,7 +50,7 @@
 
     <pg:pages activated="${activated}" length="${fillsLength}"/>
     <form id="back">
-        <input type="submit" value="<fmt:message key="back_to_settings" bundle="${loc}"/>" formaction="login">
+        <input type="submit" id="backToSettings" value="<fmt:message key="back_to_settings" bundle="${loc}"/>" formaction="login">
     </form>
 </main>
 <%@include file="footer.jsp"%>
