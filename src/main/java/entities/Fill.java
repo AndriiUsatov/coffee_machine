@@ -30,15 +30,5 @@ public class Fill {
     public Date getDate() {
         return date;
     }
-
-    @Override
-    public String toString() {
-        return "Fill{" +
-                "name='" + name + '\'' +
-                ", count=" + count +
-                ", user='" + user + '\'' +
-                ", date=" + date +
-                '}';
-    }
 }
 

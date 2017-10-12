@@ -1,8 +1,8 @@
 package dao;
 
-import entities.Fill;
 import entities.items.Item;
-import entities.users.User;
+
+import java.util.List;
 
 /**
  * DAO for operations with Item objects
@@ -11,10 +11,10 @@ import entities.users.User;
 public interface ItemDAO {
 
     /**
-     * @return Returns array of Item objects from database
+     * @return Returns list of Item objects from database
      */
 
-    Item[] getAllItems();
+    List<Item> getAllItems();
 
     /**
      * @param itemName - The name of the item
@@ -29,14 +29,5 @@ public interface ItemDAO {
      */
 
     Item getItemByName(String name);
-
-    /**@param itemName - The name of the item
-     * @param  updateCount - The parameter sets the updated quantity of the item
-     * @param admin - The user object that filled the item
-     */
-
-    void noteItemUpdate(String itemName, int updateCount, User admin);
-
-    Fill[] getItemFills();
 
 }

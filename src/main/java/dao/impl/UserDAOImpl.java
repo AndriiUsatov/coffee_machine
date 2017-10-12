@@ -4,6 +4,7 @@ import connection.ConnectionPool;
 import dao.UserDAO;
 import entities.CoffeeMachine;
 import entities.users.buider.UserBuilder;
+import exceptions.DAOException;
 import services.PasswordService;
 import entities.users.Role;
 import entities.users.User;
@@ -25,7 +26,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             queries.load(getClass().getResourceAsStream("/queries.properties"));
         } catch (IOException e) {
-            logger.log(Level.ERROR, "Exception", e);
+            logger.log(Level.ERROR, new DAOException("DAOException class: " + UserDAOImpl.class + " constructor", e));
             e.printStackTrace();
         }
     }
@@ -39,22 +40,6 @@ public class UserDAOImpl implements UserDAO {
             }
         }
         return userDAOInstance;
-    }
-
-    public synchronized boolean addHuman(User user, Connection connection) {
-        boolean result = true;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.add_human"))) {
-            connection.setAutoCommit(false);
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setString(3, user.getMiddleName());
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            logger.log(Level.ERROR, "Exception", e);
-            result = false;
-            e.printStackTrace();
-        }
-        return result;
     }
 
     public synchronized boolean addUser(User user, Connection connection) {
@@ -75,28 +60,28 @@ public class UserDAOImpl implements UserDAO {
             set.next();
             user.setId(set.getLong(1));
         } catch (SQLException e) {
-            logger.log(Level.ERROR, "Exception", e);
+            logger.log(Level.ERROR, new DAOException("DAOException class: " + UserDAOImpl.class + " method: addUser", e));
             result = false;
             e.printStackTrace();
         }
         return result;
     }
 
-    public synchronized boolean addMachineHasUser(User user, Connection connection){
+    public synchronized boolean addMachineHasUser(User user, Connection connection) {
         boolean result = true;
-            try (PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.add_machine_has_user"))) {
-                if (user.getId() == -1)
-                    throw new SQLException("User ID invalid number: " + user.getId());
-                preparedStatement.setLong(1, user.getId());
-                preparedStatement.setInt(2, coffeeMachine.getMachineId());
-                preparedStatement.execute();
-            } catch (SQLException e) {
-                logger.log(Level.ERROR, "Exception, e");
-                result = false;
-                e.printStackTrace();
-            }
+        try (PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.add_machine_has_user"))) {
+            if (user.getId() == -1)
+                throw new SQLException("User ID invalid number: " + user.getId());
+            preparedStatement.setLong(1, user.getId());
+            preparedStatement.setInt(2, coffeeMachine.getMachineId());
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, new DAOException("DAOException class: " + UserDAOImpl.class + " method: addMachineHasUser", e));
+            result = false;
+            e.printStackTrace();
+        }
         return result;
-}
+    }
 
     public synchronized User getUserByLogin(String login) {
         User user = null;
@@ -117,7 +102,7 @@ public class UserDAOImpl implements UserDAO {
                         build();
             }
         } catch (SQLException e) {
-            logger.log(Level.ERROR, "Exception", e);
+            logger.log(Level.ERROR, new DAOException("DAOException class: " + UserDAOImpl.class + " method: getUserByLogin", e));
             e.printStackTrace();
         }
         return user;
@@ -131,7 +116,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            logger.log(Level.ERROR, "Exception", e);
+            logger.log(Level.ERROR, new DAOException("DAOException class: " + UserDAOImpl.class + " method: updateBalance", e));
             e.printStackTrace();
         }
         return false;

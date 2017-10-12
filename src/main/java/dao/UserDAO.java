@@ -22,14 +22,6 @@ public interface UserDAO {
     /**
      * @param user - User object to write to the database
      * @param connection - Connection object for connecting to database
-     * @return - true if human added successfully
-     */
-
-    boolean addHuman(User user, Connection connection);
-
-    /**
-     * @param user - User object to write to the database
-     * @param connection - Connection object for connecting to database
      * @return - true if the dependency machine has person added successfully
      */
 

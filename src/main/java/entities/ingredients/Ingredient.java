@@ -24,7 +24,7 @@ public class Ingredient {
 
     public Ingredient(String name, int quantity, int id, Date expirationDate) {
         try {
-            properties.load(getClass().getResourceAsStream("/queries.properties"));
+            properties.load(getClass().getResourceAsStream("/expiration_date.properties"));
         } catch (IOException e) { e.printStackTrace(); }
         this.name = name;
         this.quantity = quantity;
@@ -92,8 +92,17 @@ public class Ingredient {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Ingredient that = (Ingredient) o;
+
+        return name != null ? name.equals(that.name) : that.name == null;
+    }
+
     public Long getMaxExpirationDate() {
         return Long.valueOf(properties.getProperty(name + "_expiration_date"));
     }
-
 }

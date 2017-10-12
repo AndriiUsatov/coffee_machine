@@ -1,8 +1,6 @@
 package dao.factory;
 
-import dao.IngredientDAO;
-import dao.ItemDAO;
-import dao.UserDAO;
+import dao.*;
 
 public interface FactoryDAO {
 
@@ -11,4 +9,8 @@ public interface FactoryDAO {
     ItemDAO getItemDAO();
 
     UserDAO getUserDAO();
+
+    FillDAO getFillDAO();
+
+    HumanDAO getHumanDAO();
 }

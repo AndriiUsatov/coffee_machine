@@ -8,13 +8,14 @@
     <style>
         <%@include file="stylesheets/error.css"%>
     </style>
-    <title>Error page</title>
+    <title><fmt:message key="error_page" bundle="${loc}"/></title>
 </head>
 <body>
 <fieldset>
     <h1><fmt:message key="error_message" bundle="${loc}"/></h1>
     <form>
-        <input type="submit" formaction="index" id="backToHomePage" value="<fmt:message bundle="${loc}" key="back_to_home_page"/>"/>
+        <input type="submit" formaction="/machine/index" id="backToHomePage"
+               value="<fmt:message bundle="${loc}" key="back_to_home_page"/>"/>
     </form>
 </fieldset>
 </body>

@@ -59,25 +59,26 @@ public class User {
 
     public void setPassword(String password){ this.password = password; }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", balance=" + balance +
-                ", role=" + role +
-                ", id=" + id +
-                '}';
-    }
-
     public boolean isCustomer() {
         return role == Role.CUSTOMER;
     }
 
     public boolean isAdmin(){
         return role == Role.ADMIN;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (login != null ? !login.equals(user.login) : user.login != null) return false;
+        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+        if (middleName != null ? !middleName.equals(user.middleName) : user.middleName != null) return false;
+        if (role != user.role) return false;
+        return id != null ? id.equals(user.id) : user.id == null;
     }
 }

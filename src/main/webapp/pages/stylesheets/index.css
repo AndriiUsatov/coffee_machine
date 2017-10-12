@@ -13,30 +13,35 @@ form {
     margin-left: 20%;
     margin-right: 20%;
 }
-input{
+
+input {
     margin-left: 20px;
     margin-top: 5px;
 }
 
-label{
+label {
     width: 130px;
     font-size: 14px;
     display: inline-table;
     padding: 10px;
-    margin: 5px;
-    margin-left: 20%;
+    margin: 5px 5px 5px 20%;
 }
-.buttons{
+
+.buttons {
     padding: 7px 15px;
     margin-left: 20%;
-    background: linear-gradient(#00E000, #008F00);
     color: white;
+    background: linear-gradient(#00BF00, #008F00);
     font-size: 14px;
     border-radius: 25px;
     width: 15%;
     min-width: 100px;
 }
 
-.txt{
+.txt {
     width: 30%;
+}
+
+.txt:focus {
+    border-color: greenyellow;
 }

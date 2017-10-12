@@ -7,16 +7,17 @@ public class ServiceFactoryImpl implements ServiceFactory {
 
     private static ServiceFactory serviceFactoryInstance;
 
-    private ServiceFactoryImpl(){}
+    private ServiceFactoryImpl() {
+    }
 
-    public static ServiceFactory getServiceFactoryInstance(){
-        if(serviceFactoryInstance == null){
-            synchronized (ServiceFactoryImpl.class){
-                if(serviceFactoryInstance == null)
+    public static ServiceFactory getServiceFactoryInstance() {
+        if (serviceFactoryInstance == null) {
+            synchronized (ServiceFactoryImpl.class) {
+                if (serviceFactoryInstance == null)
                     serviceFactoryInstance = new ServiceFactoryImpl();
             }
         }
-        return  serviceFactoryInstance;
+        return serviceFactoryInstance;
     }
 
     @Override

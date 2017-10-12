@@ -1,5 +1,6 @@
-package connector;
+package connection;
 
+import exceptions.ConnectException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -8,6 +9,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
+
+/**
+ * Connection pool class </br>
+ *
+ * @author Andrii
+ */
 
 public class ConnectionPool {
 
@@ -27,10 +34,15 @@ public class ConnectionPool {
             context = (Context) initialContext.lookup("java:comp/env");
             dataSource = (DataSource) context.lookup("jdbc/coffee_machine");
         } catch (NamingException e) {
-            logger.log(Level.ERROR, "Exception", e);
+            logger.log(Level.ERROR, new ConnectException("ConnectException class: " + ConnectionPool.class
+                    + ", method: init(). Initialize error.", e));
             e.printStackTrace();
         }
     }
+
+    /**
+     * @return Returns ConnectionPoll class instance
+     */
 
     public static ConnectionPool getConnector() {
         if (connector == null) {
@@ -43,12 +55,17 @@ public class ConnectionPool {
         return connector;
     }
 
+    /**
+     * @return Returns Connection object for connecting to database
+     */
+
     public synchronized Connection getConnection() {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
         } catch (SQLException e) {
-            logger.log(Level.ERROR, "Exception", e);
+            logger.log(Level.ERROR, new ConnectException("ConnectException class: " + ConnectionPool.class
+                    + ", method: getConnection().", e));
             e.printStackTrace();
         }
         return connection;

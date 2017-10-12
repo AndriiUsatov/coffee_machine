@@ -3,7 +3,6 @@ package entities.drinks.tea.impl;
 import entities.drinks.tea.Tea;
 import entities.ingredients.Ingredient;
 
-
 public class GreenTea extends Tea {
 
     private static final int GREEN_TEA = 10;
@@ -11,10 +10,6 @@ public class GreenTea extends Tea {
 
     public GreenTea() {
         sugar = REGULAR_SUGAR_COUNT;
-    }
-
-    public GreenTea(int sugar) {
-        this.sugar = sugar * GRAM_OF_SUGAR_IN_SPOON;
     }
 
     @Override

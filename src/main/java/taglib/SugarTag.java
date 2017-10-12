@@ -14,7 +14,6 @@ public class SugarTag extends TagSupport {
     public int doStartTag() throws JspException {
         StringBuffer tag = new StringBuffer();
         Ingredient sugar = ServiceFactoryImpl.getServiceFactoryInstance().getIngredientService().getIngredientByName("sugar");
-
         try {
             if (sugar.getQuantity() > 4) {
                 int maxCount = sugar.getQuantity() > 4 * Drink.GRAM_OF_SUGAR_IN_SPOON ? 5

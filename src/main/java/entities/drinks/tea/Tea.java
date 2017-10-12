@@ -5,7 +5,7 @@ import entities.ingredients.Ingredient;
 
 import java.math.BigDecimal;
 
-public abstract class Tea implements Drink{
+public abstract class Tea implements Drink {
     private static final int WATER = 200;
     private static final BigDecimal PRICE = new BigDecimal(10);
 
@@ -38,16 +38,17 @@ public abstract class Tea implements Drink{
     @Override
     public int getTotalSize() {
         int result = 0;
-        for(Ingredient ingredient : getIngredients()){
+        for (Ingredient ingredient : getIngredients()) {
             result += ingredient.getQuantity();
         }
         return result;
     }
 
-    public int getBlackTea(){
+    public int getBlackTea() {
         return 0;
     }
-    public int getGreenTea(){
+
+    public int getGreenTea() {
         return 0;
     }
 }

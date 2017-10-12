@@ -11,21 +11,21 @@
     <style>
         <%@include file="stylesheets/menu.css" %>
     </style>
-    <title>Menu</title>
+    <title><fmt:message key="menu" bundle="${loc}"/></title>
 </head>
 <body>
-<form method="GET" action="personalAccount" id="userLine">
+<form method="GET" action="/machine/personalAccount" id="userLine">
     <input type="submit" name="gotoPA" id="gotoPA" class="userLineAttr"
            value="<fmt:message key="personal_cabinet" bundle="${loc}"/> ">
     <span class="userLineAttr"><fmt:message key="balance" bundle="${loc}"/> ${currentUser.getBalance()} UAH</span>
     <span class="userLineAttr">${currentUser.getLogin()}</span>
-    <span><a href="index" id="exitButton" class="userLineAttr"><img src="img/exit_button.png"
-                                                                   align="right"
-                                                                   alt="Exit"></a></span>
+    <span><a href="/machine/index" id="exitButton" class="userLineAttr"><img src="<c:url value="/img/exit_button.png"/>"
+                                                                             align="right"
+                                                                             alt="Exit"></a></span>
 </form>
 <aside>
     <br/>
-    <form action="login">
+    <form action="/machine/login">
         <br/>
         <p align="center"><fmt:message key="type_of_drink" bundle="${loc}"/></p>
         <label for="typeOfDrink"><input type="radio" name="drinkType" id="typeOfDrink" value="allDrinks"
@@ -65,14 +65,14 @@
 </aside>
 
 <main>
-    <form action="makeDrink" id="coffeeForm" method="GET"><br/>
+    <form action="/machine/makeDrink" id="coffeeForm" method="GET"><br/>
         <span id="sugarSpan">
             <c:if test="${sugarAvailable}">
                 <fmt:message key="count_of_sugar" bundle="${loc}"/>
             </c:if>
             <st:sugarTag/></span><br/><br/>
         <c:forEach var="drink" items="${drinks}">
-            <input type="submit" class="buttons" name="selectedDrink" value="${drink.getName()}"
+            <input type="submit" class="buttons" name="selectedDrink" value="${drink.getName()} ${drink.getPrice()} UAH"
                     <c:if test="${0 > currentUser.getBalance().compareTo(drink.getPrice())}">
                         disabled="disabled"
                     </c:if>/>

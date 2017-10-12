@@ -6,79 +6,21 @@
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1"
          metadata-complete="true">
-
+    <display-name>Coffee machine</display-name>
     <welcome-file-list>
-        <welcome-file>index</welcome-file>
+        <welcome-file>machine</welcome-file>
     </welcome-file-list>
     <error-page>
         <location>/pages/error.jsp</location>
     </error-page>
     <servlet>
-        <servlet-name>loginServlet</servlet-name>
-        <servlet-class>servlets.impl.LoginServlet</servlet-class>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>controller.Dispatcher</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>loginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/machine/*</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>registrationServlet</servlet-name>
-        <servlet-class>servlets.impl.RegistrationServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>registrationServlet</servlet-name>
-        <url-pattern>/registration</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>makeDrink</servlet-name>
-        <servlet-class>servlets.impl.MakeDrinkServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>makeDrink</servlet-name>
-        <url-pattern>/makeDrink</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>replenishAccount</servlet-name>
-        <servlet-class>servlets.impl.ReplenishAccountServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>replenishAccount</servlet-name>
-        <url-pattern>/replenishAccount</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>personalAccountServlet</servlet-name>
-        <servlet-class>servlets.impl.PersonalAccountServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>personalAccountServlet</servlet-name>
-        <url-pattern>/personalAccount</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>fillContainerServlet</servlet-name>
-        <servlet-class>servlets.impl.FillContainerServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>fillContainerServlet</servlet-name>
-        <url-pattern>/fillContainer</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>indexServlet</servlet-name>
-        <servlet-class>servlets.impl.IndexServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>indexServlet</servlet-name>
-        <url-pattern>/index</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>fillingHistoryServlet</servlet-name>
-        <servlet-class>servlets.impl.GetFillsHistoryServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>fillingHistoryServlet</servlet-name>
-        <url-pattern>/fillingHistory</url-pattern>
-    </servlet-mapping>
-    <display-name>Coffee machine</display-name>
-
     <resource-ref>
         <description>DB Connection</description>
         <res-ref-name>jdbc/coffee_machine</res-ref-name>

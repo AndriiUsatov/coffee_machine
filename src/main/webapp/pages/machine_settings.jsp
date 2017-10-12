@@ -10,26 +10,28 @@
     <style>
         <%@include file="stylesheets/machine_settings.css" %>
     </style>
-    <title>Machine settings</title>
+    <title><fmt:message key="machine_settings" bundle="${loc}"/></title>
 </head>
 <body>
 <form method="GET" id="userLine">
     <span>
         ${currentUser.getLogin()}
     </span>
-    <input type="submit" value="<fmt:message key="fillings_history" bundle="${loc}"/>" name="fillsHistory"
-           id="fillingHistory" formaction="fillingHistory"/>
-    <span><a href="index" id="exitButton" class="userLineAttr"><img src="img/exit_button.png"
-                                                                   align="right"
-                                                                   alt="Exit"></a></span>
+    <input type="submit" value="<fmt:message key="ingr_fills_history" bundle="${loc}"/>" name="ingrFillsType"
+           class="fillingHistory" formaction="/machine/fillingHistory"/>
+    <input type="submit" value="<fmt:message key="items_fills_history" bundle="${loc}"/>" name="itemfillsType"
+           class="fillingHistory" formaction="/machine/fillingHistory"/>
+    <span><a href="index" id="exitButton" class="userLineAttr"><img src="<c:url value="/img/exit_button.png"/>"
+                                                                    align="right"
+                                                                    alt="Exit"></a></span>
 </form>
-<form method="GET" id="ingredientsLine" action="fillContainer">
+<form method="GET" id="ingredientsLine" action="/machine/fillContainer">
     <fieldset>
         <legend><fmt:message key="ingredients" bundle="${loc}"/></legend>
         <c:forEach var="ingredient" items="${ingredients}">
-            <label>${ingredient.getCamelCaseName()} Quantity ${ingredient.filledInPercentage()}%</label>
+            <label>${ingredient.getCamelCaseName()} Quantity: ${ingredient.filledInPercentage()}%</label>
             <input type="submit" class="buttons" name="${ingredient.getName()}"
-                   value="Fill container(${ingredient.getName()})"
+                   value="<fmt:message key="fill_container" bundle="${loc}"/>"
             <c:if test="${5 < ingredient.filledInPercentage()}">
                    disabled="disabled"</c:if>
             ><br>
@@ -41,7 +43,7 @@
         <c:forEach var="item" items="${items}">
             <label>${item.getName()} Count: ${item.filledInPercentage()}%</label>
             <input type="submit" class="buttons" name="${item.getCanonicalName()}"
-                   value="Fill container(${item.getName()})"
+                   value="<fmt:message key="fill_container" bundle="${loc}"/>"
             <c:if test="${5 < item.filledInPercentage()}">
                    disabled="disabled"
             </c:if>><br/>

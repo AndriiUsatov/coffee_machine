@@ -16,10 +16,6 @@ public class Americano extends Coffee {
         sugar = REGULAR_SUGAR_COUNT;
     }
 
-    public Americano(int sugar) {
-        this.sugar = sugar * GRAM_OF_SUGAR_IN_SPOON;
-    }
-
     @Override
     public String getName() {
         return this.getClass().getSimpleName();
@@ -64,5 +60,4 @@ public class Americano extends Coffee {
     public void setSugar(int sugar) {
         this.sugar = sugar;
     }
-
 }

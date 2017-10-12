@@ -1,12 +1,8 @@
 package dao.factory.impl;
 
-import dao.IngredientDAO;
-import dao.ItemDAO;
-import dao.UserDAO;
+import dao.*;
 import dao.factory.FactoryDAO;
-import dao.impl.IngredientDAOImpl;
-import dao.impl.ItemDAOImpl;
-import dao.impl.UserDAOImpl;
+import dao.impl.*;
 
 public class FactoryDAOImpl implements FactoryDAO {
 
@@ -38,4 +34,11 @@ public class FactoryDAOImpl implements FactoryDAO {
     public UserDAO getUserDAO() {
         return UserDAOImpl.getUserDAOInstance();
     }
+
+    @Override
+    public FillDAO getFillDAO() { return FillDAOImpl.getFillDAOInstance(); }
+
+    @Override
+    public HumanDAO getHumanDAO() { return HumanDAOImpl.getHumanDAOInstance(); }
+
 }

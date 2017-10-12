@@ -5,7 +5,6 @@ import entities.ingredients.Ingredient;
 
 import java.math.BigDecimal;
 
-
 public class Espresso extends Coffee {
     private static final int WATER = 30;
     private static final int COFFEE = 9;
@@ -14,8 +13,6 @@ public class Espresso extends Coffee {
     private int sugar;
 
     public Espresso(){ sugar = REGULAR_SUGAR_COUNT; }
-
-    public Espresso(int sugar){ this.sugar = sugar * GRAM_OF_SUGAR_IN_SPOON; }
 
     @Override
     public String getName() {
@@ -60,5 +57,4 @@ public class Espresso extends Coffee {
     public void setSugar(int sugar) {
         this.sugar = sugar;
     }
-
 }

@@ -16,10 +16,6 @@ public class Latte extends Coffee {
         sugar = REGULAR_SUGAR_COUNT;
     }
 
-    public Latte(int sugar) {
-        this.sugar = sugar * GRAM_OF_SUGAR_IN_SPOON;
-    }
-
     @Override
     public String getName() {
         return this.getClass().getSimpleName();
@@ -63,5 +59,4 @@ public class Latte extends Coffee {
     public void setSugar(int sugar) {
         this.sugar = sugar;
     }
-
 }

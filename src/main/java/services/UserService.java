@@ -2,6 +2,7 @@ package services;
 
 
 import connection.ConnectionPool;
+import dao.HumanDAO;
 import dao.UserDAO;
 import dao.factory.impl.FactoryDAOImpl;
 import entities.users.User;
@@ -9,6 +10,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import validators.UserValidator;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,6 +18,7 @@ import java.sql.SQLException;
 public class UserService {
     private static UserService userServiceInstance;
     private UserDAO userDAO = FactoryDAOImpl.getFactoryDAOInstance().getUserDAO();
+    private HumanDAO humanDAO = FactoryDAOImpl.getFactoryDAOInstance().getHumanDAO();
     private static final Logger logger = Logger.getLogger(UserService.class);
 
     private UserService() {
@@ -31,18 +34,15 @@ public class UserService {
         return userServiceInstance;
     }
 
-    public synchronized boolean registerUser(User user) {
+    public synchronized boolean registerUser(User user, HttpServletRequest request) {
         if (user == null)
             return false;
         boolean result = true;
-        if (UserValidator.getUserValidatorInstance().validateRegister(user)) {
-            if (userDAO.getUserByLogin(user.getLogin()) != null) {
-                return false;
-            }
+        if (UserValidator.getUserValidatorInstance().validateRegister(user, request)) {
             try (Connection connection = ConnectionPool.getConnector().getConnection()) {
                 try {
                     connection.setAutoCommit(false);
-                    if (userDAO.addHuman(user, connection) && userDAO.addUser(user, connection)
+                    if (humanDAO.insertHuman(user, connection) && userDAO.addUser(user, connection)
                             && userDAO.addMachineHasUser(user, connection)) {
                         logger.log(Level.INFO, "Added new user - " + user.getLogin());
                         connection.commit();
@@ -63,7 +63,7 @@ public class UserService {
                 result = false;
                 e.printStackTrace();
             }
-        }
+        } else result = false;
         return result;
     }
 
@@ -74,7 +74,7 @@ public class UserService {
     }
 
     public synchronized boolean updateBalance(BigDecimal balance, String login) {
-        if(balance == null || login == null)
+        if (balance == null || login == null || balance.compareTo(new BigDecimal(0)) < 0)
             return false;
         return userDAO.updateBalance(balance, login);
     }

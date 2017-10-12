@@ -33,14 +33,6 @@ public abstract class Item {
         return (int) (((double) count / getMaxCount()) * 100);
     }
 
-    @Override
-    public String toString() {
-        return "Item{" +
-                "name='" + getName() + '\'' +
-                ", count=" + count +
-                '}';
-    }
-
     public abstract String getDBName();
 
     public int getId() {

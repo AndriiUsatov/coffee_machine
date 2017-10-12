@@ -13,7 +13,6 @@ public class Cappuccino extends Coffee {
     private int sugar;
 
     public Cappuccino(){ sugar = REGULAR_SUGAR_COUNT; }
-    public Cappuccino(int sugar){ this.sugar = sugar * GRAM_OF_SUGAR_IN_SPOON; }
 
     @Override
     public String getName() {
@@ -59,5 +58,4 @@ public class Cappuccino extends Coffee {
     public void setSugar(int sugar) {
         this.sugar = sugar;
     }
-
 }

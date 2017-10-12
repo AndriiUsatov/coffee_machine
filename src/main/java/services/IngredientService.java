@@ -1,15 +1,19 @@
 package services;
 
+import dao.FillDAO;
 import dao.IngredientDAO;
 import dao.factory.impl.FactoryDAOImpl;
 import entities.Fill;
 import entities.ingredients.Ingredient;
 import entities.users.User;
 
+import java.util.List;
+
 public class IngredientService {
 
     private static IngredientService ingredientServiceInstance;
     private IngredientDAO ingredientDAO = FactoryDAOImpl.getFactoryDAOInstance().getIngredientDAO();
+    private FillDAO fillDAO = FactoryDAOImpl.getFactoryDAOInstance().getFillDAO();
 
     private IngredientService() {
     }
@@ -24,15 +28,14 @@ public class IngredientService {
         return ingredientServiceInstance;
     }
 
-    public Ingredient[] getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredientDAO.getAllIngredients();
     }
 
     public void updateIngredient(String ingredientName, int quantity, User admin) {
-        int updateQuantity = quantity - ingredientDAO.getIngredientByName(ingredientName).getQuantity();
-        if (ingredientDAO.updateIngredient(ingredientName, quantity))
-            ingredientDAO.noteIngredientUpdate(ingredientName, updateQuantity, admin);
-
+        if (ingredientDAO.updateIngredient(ingredientName, quantity)) {
+            fillDAO.noteIngredientFill(ingredientDAO.getIngredientByName(ingredientName), quantity, admin);
+        }
     }
 
     public Ingredient getIngredientByName(String sugar) {
@@ -42,7 +45,7 @@ public class IngredientService {
     }
 
     public synchronized void checkExpirationDate() {
-        Ingredient[] ingredients = ingredientDAO.getAllIngredients();
+        List<Ingredient> ingredients = ingredientDAO.getAllIngredients();
         for (Ingredient ingredient : ingredients) {
             if (ingredient.getExpirationDate().getTime() <= System.currentTimeMillis()) {
                 ingredientDAO.updateIngredient(ingredient.getName(), 0);
@@ -50,8 +53,11 @@ public class IngredientService {
         }
     }
 
-    public synchronized Fill[] getAllFills() {
-        return ingredientDAO.getIngredientFills();
+    public synchronized List<Fill> getIngredientFills(int skipCount) {
+        return fillDAO.getIngredientFillsLimit(skipCount);
     }
 
+    public synchronized Integer getIngredientFillsCount() {
+        return fillDAO.getIngredientFillsLength();
+    }
 }

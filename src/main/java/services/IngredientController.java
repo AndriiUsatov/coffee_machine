@@ -1,10 +1,13 @@
-package controllers;
+package services;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import services.factory.impl.ServiceFactoryImpl;
 
 
 public class IngredientController implements Runnable {
     private final static long MILLIS_IN_DAY = 1000L * 60 * 60 * 24;
+    private static final Logger logger = Logger.getLogger(IngredientController.class);
 
     @Override
     public void run() {
@@ -14,6 +17,7 @@ public class IngredientController implements Runnable {
                 Thread.currentThread().sleep(MILLIS_IN_DAY);
             }
         } catch (InterruptedException e) {
+            logger.log(Level.ERROR, e);
             e.printStackTrace();
         }
     }

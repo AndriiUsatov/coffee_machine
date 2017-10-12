@@ -2,14 +2,12 @@ package dao.impl;
 
 import connection.ConnectionPool;
 import dao.ItemDAO;
-import entities.Fill;
 import entities.items.Item;
 import entities.items.impl.Stick;
 import entities.items.impl.BigCup;
 import entities.items.impl.LittleCup;
 import entities.items.impl.MiddleCup;
-import entities.CoffeeMachine;
-import entities.users.User;
+import exceptions.DAOException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -22,14 +20,13 @@ import java.util.Properties;
 public class ItemDAOImpl implements ItemDAO {
     private static Properties queries = new Properties();
     private static final Logger logger = Logger.getLogger(ItemDAOImpl.class);
-    private static CoffeeMachine coffeeMachine = CoffeeMachine.getCoffeeMachineInstance();
     private static ItemDAOImpl itemDAOInstance;
 
     private ItemDAOImpl() {
         try {
             queries.load(getClass().getResourceAsStream("/queries.properties"));
         } catch (IOException e) {
-            logger.log(Level.ERROR, "Exception", e);
+            logger.log(Level.ERROR, new DAOException("DAOException class: " + ItemDAOImpl.class + " constructor", e));
             e.printStackTrace();
         }
     }
@@ -45,8 +42,8 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     @Override
-    public synchronized Item[] getAllItems() {
-        List<Item> list = new ArrayList<Item>(){
+    public synchronized List<Item> getAllItems() {
+        List<Item> list = new ArrayList<Item>() {
             {
                 add(new Stick());
                 add(new LittleCup());
@@ -59,16 +56,16 @@ public class ItemDAOImpl implements ItemDAO {
             ResultSet resultSet = statement.executeQuery(queries.getProperty("coffee_machine.get_all_item"));
             while (resultSet.next()) {
                 String itemName = resultSet.getString("name");
-                for(Item item : list){
-                    if(itemName.equals(item.getDBName()))
+                for (Item item : list) {
+                    if (itemName.equals(item.getDBName()))
                         item.setCount(resultSet.getInt("quantity"));
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.ERROR, "Exception", e);
+            logger.log(Level.ERROR, new DAOException("DAOException class: " + ItemDAOImpl.class + " method: getAllItems", e));
             e.printStackTrace();
         }
-        return list.toArray(new Item[list.size()]);
+        return list;
     }
 
     public synchronized Item getItemByName(String name) {
@@ -96,64 +93,32 @@ public class ItemDAOImpl implements ItemDAO {
                 item.setId(resultSet.getInt("id"));
             }
         } catch (SQLException e) {
-            logger.log(Level.ERROR, "Exception", e);
+            logger.log(Level.ERROR, new DAOException("DAOException class: " + ItemDAOImpl.class + " method: getItemByName", e));
             e.printStackTrace();
         }
         return item;
     }
 
     @Override
-    public void noteItemUpdate(String itemName, int updateCount, User admin) {
-        try (Connection connection = ConnectionPool.getConnector().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.add_item_fills"))) {
-            Item item = getItemByName(itemName);
-            preparedStatement.setInt(1, updateCount);
-            preparedStatement.setDate(2, new Date(System.currentTimeMillis()));
-            preparedStatement.setInt(3, item.getId());
-            preparedStatement.setLong(4, admin.getId());
-            preparedStatement.setInt(5, coffeeMachine.getMachineId());
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            logger.log(Level.ERROR, "Exception", e);
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     public synchronized boolean updateItem(String itemName, int count) {
         boolean result = true;
-        if(itemName == null || itemName.equals(""))
+        if (itemName == null || itemName.equals(""))
             return false;
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.update_item"))) {
             Item item = getItemByName(itemName);
-                preparedStatement.setInt(1, count);
-                preparedStatement.setString(2, itemName);
-                preparedStatement.executeUpdate();
+            preparedStatement.setInt(1, count);
+            preparedStatement.setString(2, itemName);
+            preparedStatement.executeUpdate();
             if (item.getCount() < count) {
                 logger.log(Level.INFO, "Added " + (count - item.getCount()) +
                         " number of " + itemName.toUpperCase() + " into Coffee machine");
             }
         } catch (SQLException e) {
-            logger.log(Level.ERROR, "Exception", e);
+            logger.log(Level.ERROR, new DAOException("DAOException class: " + ItemDAOImpl.class + " method: updateItem", e));
             e.printStackTrace();
             result = false;
         }
         return result;
-    }
-
-    @Override
-    public Fill[] getItemFills() {
-        List<Fill> list = new ArrayList<>();
-        try (Connection connection = ConnectionPool.getConnector().getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(queries.getProperty("coffee_machine.get_all_item_fills"));
-            while (resultSet.next()){
-                list.add(new Fill(resultSet.getString("name"),resultSet.getInt("quantity"),resultSet.getString("login"),resultSet.getDate("date")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return list.toArray(new Fill[list.size()]);
     }
 }

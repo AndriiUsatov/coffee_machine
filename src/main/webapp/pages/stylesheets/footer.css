@@ -11,3 +11,6 @@ button{
     background-color: whitesmoke;
     text-align: center;
 }
+button:enabled{
+    border: none;
+}
