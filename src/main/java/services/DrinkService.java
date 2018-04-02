@@ -40,7 +40,7 @@ public class DrinkService {
         return drinkServiceInstance;
     }
 
-    public synchronized boolean makeDrink(Drink drink, User payer) {
+    public boolean makeDrink(Drink drink, User payer) {
         boolean result = true;
 
         String cup = CupService.getCupServiceInstance().chooseCup4Drink(drink);
@@ -73,7 +73,7 @@ public class DrinkService {
         return result;
     }
 
-    public synchronized List<Drink> getAvailableDrinks() {
+    public List<Drink> getAvailableDrinks() {
         Drink[] drinks = {new Espresso(), new Americano(), new Cappuccino(), new Latte(), new BlackTea(), new GreenTea()};
         List<Drink> result = new ArrayList<>();
         List<Ingredient> ingredients = ingredientDAO.getAllIngredients();
@@ -91,7 +91,7 @@ public class DrinkService {
         return result;
     }
 
-    public synchronized List<Drink> getRequestedDrinks(String drinkTypeFilter, String milkFilter) {
+    public List<Drink> getRequestedDrinks(String drinkTypeFilter, String milkFilter) {
         List<Drink> availableDrinks = getAvailableDrinks();
         if (drinkTypeFilter == null || drinkTypeFilter.equals("allDrinks"))
             if (milkFilter == null || milkFilter.equals("allDrinks")) {

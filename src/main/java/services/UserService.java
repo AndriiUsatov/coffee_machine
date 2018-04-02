@@ -34,7 +34,7 @@ public class UserService {
         return userServiceInstance;
     }
 
-    public synchronized boolean registerUser(User user, HttpServletRequest request) {
+    public boolean registerUser(User user, HttpServletRequest request) {
         if (user == null)
             return false;
         boolean result = true;
@@ -67,13 +67,13 @@ public class UserService {
         return result;
     }
 
-    public synchronized User getUser(String login) {
+    public User getUser(String login) {
         if (login == null)
             return null;
         return userDAO.getUserByLogin(login);
     }
 
-    public synchronized boolean updateBalance(BigDecimal balance, String login) {
+    public boolean updateBalance(BigDecimal balance, String login) {
         if (balance == null || login == null || balance.compareTo(new BigDecimal(0)) < 0)
             return false;
         return userDAO.updateBalance(balance, login);

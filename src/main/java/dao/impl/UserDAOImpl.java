@@ -42,7 +42,7 @@ public class UserDAOImpl implements UserDAO {
         return userDAOInstance;
     }
 
-    public synchronized boolean addUser(User user, Connection connection) {
+    public boolean addUser(User user, Connection connection) {
         boolean result = true;
         long humanID = -1;
         try (PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.add_user"));
@@ -67,7 +67,7 @@ public class UserDAOImpl implements UserDAO {
         return result;
     }
 
-    public synchronized boolean addMachineHasUser(User user, Connection connection) {
+    public boolean addMachineHasUser(User user, Connection connection) {
         boolean result = true;
         try (PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.add_machine_has_user"))) {
             if (user.getId() == -1)
@@ -83,7 +83,7 @@ public class UserDAOImpl implements UserDAO {
         return result;
     }
 
-    public synchronized User getUserByLogin(String login) {
+    public User getUserByLogin(String login) {
         User user = null;
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.get_user"))) {
@@ -108,7 +108,7 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
-    public synchronized boolean updateBalance(BigDecimal balance, String login) {
+    public boolean updateBalance(BigDecimal balance, String login) {
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.set_balance"))) {
             preparedStatement.setDouble(1, balance.doubleValue());

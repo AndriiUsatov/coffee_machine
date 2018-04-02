@@ -39,7 +39,7 @@ public class IngredientDAOImpl implements IngredientDAO {
         return ingredientDAOInstance;
     }
 
-    public synchronized List<Ingredient> getAllIngredients() {
+    public List<Ingredient> getAllIngredients() {
         List<Ingredient> ingredients = new ArrayList<>();
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              Statement statement = connection.createStatement()) {
@@ -60,7 +60,7 @@ public class IngredientDAOImpl implements IngredientDAO {
         return ingredients;
     }
 
-    public synchronized Ingredient getIngredientByName(String ingredientName) {
+    public Ingredient getIngredientByName(String ingredientName) {
         Ingredient ingredient = null;
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.get_ingredient"))) {
@@ -82,7 +82,7 @@ public class IngredientDAOImpl implements IngredientDAO {
     }
 
     @Override
-    public synchronized boolean updateIngredient(String ingredientName, int quantity) {
+    public boolean updateIngredient(String ingredientName, int quantity) {
         boolean result = true;
         if (ingredientName == null || ingredientName.equals("")) {
             return false;

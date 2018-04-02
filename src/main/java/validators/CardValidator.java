@@ -11,13 +11,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CardValidator {
-    public synchronized static boolean validateCard(Card card, String amount) {
+    public static boolean validateCard(Card card, String amount) {
         if (card == null || amount == null)
             return false;
         return validateNumber(card.getCardNumber()) && validateSecureCode(card.getSecureCode()) && validateAmount(amount);
     }
 
-    private synchronized static boolean validateNumber(String cardNumber) {
+    private static boolean validateNumber(String cardNumber) {
         boolean result = false;
         if (hasScript(cardNumber))
             return result;
@@ -29,7 +29,7 @@ public class CardValidator {
         return result;
     }
 
-    private synchronized static boolean validateSecureCode(String secureCode) {
+    private static boolean validateSecureCode(String secureCode) {
         boolean result = false;
         if (hasScript(secureCode))
             return result;
@@ -41,24 +41,24 @@ public class CardValidator {
         return result;
     }
 
-    private synchronized static boolean validateAmount(String amount) {
+    private static boolean validateAmount(String amount) {
         if (hasScript(amount))
             return false;
         return Integer.parseInt(amount) > 0 && amount.length() < 6;
     }
 
-    private synchronized static boolean validateDate() {
+    private static boolean validateDate() {
         return true;
     }
 
-    private synchronized static boolean hasScript(String line) {
+    private static boolean hasScript(String line) {
         String scriptRegex = new String("<script");
         Pattern pattern = Pattern.compile(scriptRegex);
         Matcher matcher = pattern.matcher(line);
         return matcher.find();
     }
 
-    public synchronized static boolean validateExpiryDate(String month, String year) {
+    public static boolean validateExpiryDate(String month, String year) {
         if (month == null || year == null)
             return false;
         if (hasScript(month) || hasScript(year))

@@ -38,7 +38,7 @@ public class HumanDAOImpl implements HumanDAO {
     }
 
     @Override
-    public synchronized boolean insertHuman(User user, Connection connection) {
+    public boolean insertHuman(User user, Connection connection) {
         boolean result = true;
         try (PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.add_human"))) {
             connection.setAutoCommit(false);

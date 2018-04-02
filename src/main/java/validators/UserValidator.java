@@ -29,7 +29,7 @@ public class UserValidator {
         return userValidatorInstance;
     }
 
-    public synchronized boolean validateLoginIn(String login, String password) {
+    public boolean validateLoginIn(String login, String password) {
         if (!hasScript(login) && !hasScript(password)) {
             User user = serviceFactory.getUserService().getUser(login);
             if (user != null) {
@@ -39,7 +39,7 @@ public class UserValidator {
         return false;
     }
 
-    public synchronized boolean validateSession(HttpServletRequest request, Role role) {
+    public boolean validateSession(HttpServletRequest request, Role role) {
         User sessionUser = (User) request.getSession().getAttribute("currentUser");
         if (sessionUser == null || sessionUser.getRole() != role)
             return false;
@@ -52,7 +52,7 @@ public class UserValidator {
         return false;
     }
 
-    public synchronized boolean validateRegister(User user, HttpServletRequest request) {
+    public boolean validateRegister(User user, HttpServletRequest request) {
         boolean result = true;
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
@@ -90,7 +90,7 @@ public class UserValidator {
         return result;
     }
 
-    private synchronized boolean validateName(String name) {
+    private boolean validateName(String name) {
         if (name == null || hasScript(name))
             return false;
         boolean result = false;
@@ -102,7 +102,7 @@ public class UserValidator {
         return result;
     }
 
-    private synchronized boolean validatePassword(String password) {
+    private boolean validatePassword(String password) {
         if (password == null || hasScript(password))
             return false;
         boolean result = false;
@@ -114,7 +114,7 @@ public class UserValidator {
         return result;
     }
 
-    private synchronized boolean validateLogin(String login) {
+    private boolean validateLogin(String login) {
         if (login == null || hasScript(login))
             return false;
         boolean result = false;
@@ -126,7 +126,7 @@ public class UserValidator {
         return result;
     }
 
-    private synchronized boolean hasScript(String line) {
+    private boolean hasScript(String line) {
         if (line == null)
             return true;
         String scriptRegex = new String("<script");

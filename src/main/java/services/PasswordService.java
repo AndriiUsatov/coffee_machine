@@ -26,7 +26,7 @@ public class PasswordService {
         return passwordServiceInstance;
     }
 
-    public synchronized String encrypt(String password) {
+    public String encrypt(String password) {
         String result = null;
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

@@ -27,26 +27,26 @@ public class ItemService {
         return itemServiceInstance;
     }
 
-    public synchronized List<Item> getItems() {
+    public List<Item> getItems() {
         return itemDAO.getAllItems();
     }
 
-    public synchronized void updateItem(String itemName, int count, User admin) {
+    public void updateItem(String itemName, int count, User admin) {
         int updateCount = count - itemDAO.getItemByName(itemName).getCount();
         if (itemDAO.updateItem(itemName, count)) {
             fillDAO.noteItemFill(itemDAO.getItemByName(itemName), updateCount, admin);
         }
     }
 
-    public synchronized Item getItemByName(String itemName) {
+    public Item getItemByName(String itemName) {
         return itemDAO.getItemByName(itemName);
     }
 
-    public synchronized List<Fill> getItemFills(int skipCount) {
+    public List<Fill> getItemFills(int skipCount) {
         return fillDAO.getItemFillsLimit(skipCount);
     }
 
-    public synchronized Integer getItemFillsCount() {
+    public Integer getItemFillsCount() {
         return fillDAO.getItemFillsLength();
     }
 }

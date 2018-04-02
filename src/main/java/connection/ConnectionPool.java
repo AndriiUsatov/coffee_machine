@@ -59,7 +59,7 @@ public class ConnectionPool {
      * @return Returns Connection object for connecting to database
      */
 
-    public synchronized Connection getConnection() {
+    public Connection getConnection() {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();

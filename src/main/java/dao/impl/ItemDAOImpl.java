@@ -42,7 +42,7 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     @Override
-    public synchronized List<Item> getAllItems() {
+    public List<Item> getAllItems() {
         List<Item> list = new ArrayList<Item>() {
             {
                 add(new Stick());
@@ -68,7 +68,7 @@ public class ItemDAOImpl implements ItemDAO {
         return list;
     }
 
-    public synchronized Item getItemByName(String name) {
+    public Item getItemByName(String name) {
         Item item = null;
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.get_item"))) {
@@ -100,7 +100,7 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     @Override
-    public synchronized boolean updateItem(String itemName, int count) {
+    public boolean updateItem(String itemName, int count) {
         boolean result = true;
         if (itemName == null || itemName.equals(""))
             return false;

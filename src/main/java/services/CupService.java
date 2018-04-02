@@ -24,7 +24,7 @@ public class CupService {
         return cupServiceInstance;
     }
 
-    public synchronized String chooseCup4Drink(Drink drink) {
+    public String chooseCup4Drink(Drink drink) {
         String cup = null;
         if (LittleCup.SIZE >= drink.getTotalSize()
                 && itemDAO.getItemByName(LittleCup.DB_NAME).getCount() > 0) {
@@ -39,7 +39,7 @@ public class CupService {
         return cup;
     }
 
-    public synchronized int getCupCount(String cupName) {
+    public int getCupCount(String cupName) {
         if (cupName == null)
             return 0;
         return itemDAO.getItemByName(cupName).getCount();

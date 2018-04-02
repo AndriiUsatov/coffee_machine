@@ -45,7 +45,7 @@ public class FillDAOImpl implements FillDAO {
     }
 
     @Override
-    public synchronized void noteIngredientFill(Ingredient ingredient, int updateQuantity, User admin) {
+    public void noteIngredientFill(Ingredient ingredient, int updateQuantity, User admin) {
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.add_ingredient_fills"))) {
             preparedStatement.setInt(1, updateQuantity);
@@ -61,7 +61,7 @@ public class FillDAOImpl implements FillDAO {
     }
 
     @Override
-    public synchronized void noteItemFill(Item item, int updateCount, User admin) {
+    public void noteItemFill(Item item, int updateCount, User admin) {
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.add_item_fills"))) {
             preparedStatement.setDate(2, new Date(System.currentTimeMillis()));
@@ -77,7 +77,7 @@ public class FillDAOImpl implements FillDAO {
     }
 
     @Override
-    public synchronized List<Fill> getIngredientFillsLimit(int skipCount) {
+    public List<Fill> getIngredientFillsLimit(int skipCount) {
         List<Fill> list = new ArrayList<>();
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.get_ingr_fills_limit"))) {
@@ -95,7 +95,7 @@ public class FillDAOImpl implements FillDAO {
     }
 
     @Override
-    public synchronized List<Fill> getItemFillsLimit(int skipCount) {
+    public List<Fill> getItemFillsLimit(int skipCount) {
         List<Fill> list = new ArrayList<>();
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queries.getProperty("coffee_machine.get_item_fills_limit"))) {
@@ -113,7 +113,7 @@ public class FillDAOImpl implements FillDAO {
     }
 
     @Override
-    public synchronized int getItemFillsLength() {
+    public int getItemFillsLength() {
         int result = 0;
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              Statement statement = connection.createStatement()) {
@@ -128,7 +128,7 @@ public class FillDAOImpl implements FillDAO {
     }
 
     @Override
-    public synchronized int getIngredientFillsLength() {
+    public int getIngredientFillsLength() {
         int result = 0;
         try (Connection connection = ConnectionPool.getConnector().getConnection();
              Statement statement = connection.createStatement()) {

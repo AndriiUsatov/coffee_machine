@@ -44,7 +44,7 @@ public class IngredientService {
         return ingredientDAO.getIngredientByName(sugar);
     }
 
-    public synchronized void checkExpirationDate() {
+    public void checkExpirationDate() {
         List<Ingredient> ingredients = ingredientDAO.getAllIngredients();
         for (Ingredient ingredient : ingredients) {
             if (ingredient.getExpirationDate().getTime() <= System.currentTimeMillis()) {
@@ -53,11 +53,11 @@ public class IngredientService {
         }
     }
 
-    public synchronized List<Fill> getIngredientFills(int skipCount) {
+    public List<Fill> getIngredientFills(int skipCount) {
         return fillDAO.getIngredientFillsLimit(skipCount);
     }
 
-    public synchronized Integer getIngredientFillsCount() {
+    public Integer getIngredientFillsCount() {
         return fillDAO.getIngredientFillsLength();
     }
 }
